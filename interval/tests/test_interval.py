@@ -1,6 +1,8 @@
-from planmaker.core.interval import Interval
-from planmaker.core.util import ValidationError
+from interval.core import Interval
+from interval.core import ValidationError
+
 from nose.tools import raises
+
 from unittest import TestCase
 
 @raises(ValidationError)
