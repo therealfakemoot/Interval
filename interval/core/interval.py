@@ -29,7 +29,7 @@ class Interval(object):
         else:
             return self.start < other.start
 
-    def __xor__(self, other):
+    def __and__(self, other):
         if self == other:
             return True
         if self.ropen or other.lopen:
