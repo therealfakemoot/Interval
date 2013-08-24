@@ -9,7 +9,7 @@ class Interval(object):
     assuming the values passed as start and end are comparable with each other.
 
     a < b : Tests whether a precedes b.
-    a <= b : Tests whether a overlaps with b.
+    a ^ b : Tests whether a overlaps with b.
     '''
      
     def __init__(self, (start, leftopen), (end, rightopen)):
