@@ -1,5 +1,6 @@
 from functools import total_ordering
-from planmaker.core.util import ValidationError
+
+class ValidationError(Exception):pass
 
 @total_ordering
 class Interval(object):
@@ -28,4 +29,10 @@ class Interval(object):
         else:
             return self.start < other.start
 
-    def __
+    def __xor__(self, other):
+        if self == other:
+            return True
+        if self.ropen or other.lopen:
+            return self.end >= other.start
+        else:
+            return self.end > other.start
