@@ -27,11 +27,11 @@ class OpenInterval(TestCase):
 
     def test_overlapping_interval(self):
         i = Interval((2, True), (3, True))
-        assert self.i <= i
+        assert self.i ^ i
 
     def test_non_overlapping_interval(self):
         i = Interval((3, True), (4, True))
-        assert not self.i <= i
+        assert not self.i ^ i
 
 class LeftClosedInterval(OpenInterval):
     def setUp(self):
