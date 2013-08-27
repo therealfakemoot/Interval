@@ -11,7 +11,7 @@ class Interval(object):
     a < b : Tests whether a precedes b.
     a ^ b : Tests whether a overlaps with b.
     '''
-     
+
     def __init__(self, (start, leftopen), (end, rightopen)):
         if start > end:
             raise ValidationError('Start value must preceed end value.')
@@ -19,6 +19,19 @@ class Interval(object):
         self.lopen = leftopen
         self.end = end
         self.ropen = rightopen
+
+    def __str__(self):
+        if self.lopen:
+            l = '('
+        else:
+            l = '['
+
+        if self.ropen:
+            r = ')'
+        else:
+            l = ']'
+
+        return "{l}{start},{end}{r}".format(l=l,r=r, start=self.start, end=self.end)
 
     def __eq__(self, other):
         return (self.start,self.end) == (other.start,other.end) and (self.lopen, self.ropen) == (other.lopen, other.ropen)
