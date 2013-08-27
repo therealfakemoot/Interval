@@ -29,7 +29,7 @@ class Interval(object):
         if self.ropen:
             r = ')'
         else:
-            l = ']'
+            r = ']'
 
         return "{l}{start},{end}{r}".format(l=l,r=r, start=self.start, end=self.end)
 
