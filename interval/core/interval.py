@@ -36,6 +36,9 @@ class Interval(object):
     def __eq__(self, other):
         return (self.start,self.end) == (other.start,other.end) and (self.lopen, self.ropen) == (other.lopen, other.ropen)
 
+    def __nonzero__(self):
+        return (self.lopen or self.ropen) and (self.start == self.end)
+
     def __lt__(self, other):
         if self.ropen or other.lopen:
             return self.start <= other.start
