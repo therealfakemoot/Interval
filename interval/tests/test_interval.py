@@ -1,7 +1,7 @@
 from interval.core import Interval
 from interval.core import ValidationError
 
-from nose.tools import raises
+from nose.tools import raises, eq_
 
 from unittest import TestCase
 
@@ -15,7 +15,7 @@ class OpenInterval(TestCase):
 
     def test_equal_intervals(self):
         i = Interval((0, True), (2, True))
-        assert self.i == i
+        eq_(self.i, i, msg="{} == {}".format(self.i, i))
 
     def test_unequal_intervals(self):
         i = Interval((0, True), (1, True))
