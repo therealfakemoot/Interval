@@ -1,7 +1,7 @@
 from interval.core import Interval
 from interval.core import ValidationError
 
-from nose.tools import raises, eq_
+from nose.tools import raises, eq_, ok_
 
 from unittest import TestCase
 
@@ -19,19 +19,19 @@ class OpenInterval(TestCase):
 
     def test_unequal_intervals(self):
         i = Interval((0, True), (1, True))
-        assert self.i != i
+        ok_(not self.i == i, msg="{} != {}".format(self.i, i))
 
     def test_preceding_interval(self):
         i = Interval((2, True), (3, True))
-        assert self.i < i
+        ok_(self.i < i, msg="{} < {}".format(self.i, i))
 
     def test_overlapping_interval(self):
         i = Interval((2, True), (3, True))
-        assert self.i & i
+        ok_(self.i & i, msg="{} & {}".format(self.i, i))
 
     def test_non_overlapping_interval(self):
         i = Interval((3, True), (4, True))
-        assert not self.i & i
+        ok_(not self.i & i, msg="not {} & {}".format(self.i, i))
 
 class LeftClosedInterval(OpenInterval):
     def setUp(self):
@@ -47,7 +47,7 @@ class RightClosedInterval(OpenInterval):
 
     def test_equal_intervals(self):
         i = Interval((0, True), (2, False))
-        assert self.i == i
+        eq_(self.i, i, msg="{} == {}".format(self.i, i))
 
 class ClosedInterval(OpenInterval):
     def setUp(self):
@@ -55,4 +55,4 @@ class ClosedInterval(OpenInterval):
 
     def test_equal_intervals(self):
         i = Interval((0, False), (2, False))
-        assert self.i == i
+        eq_(self.i, i, msg="{} == {}".format(self.i, i))
