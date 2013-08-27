@@ -33,6 +33,11 @@ class OpenInterval(TestCase):
         i = Interval((3, True), (4, True))
         ok_(not self.i & i, msg="not {} & {}".format(self.i, i))
 
+    def test_interval_addition(self):
+        i = Interval((2, True), (3, True))
+        result = Interval((0,True), (3, True))
+        eq_(self.i + i, result, msg="{} + {}".format(self.i, i))
+
 class LeftClosedInterval(OpenInterval):
     def setUp(self):
         self.i = Interval((0, False), (2, True))
@@ -40,6 +45,10 @@ class LeftClosedInterval(OpenInterval):
     def test_equal_intervals(self):
         i = Interval((0, False), (2, True))
         assert self.i == i
+    def test_interval_addition(self):
+        i = Interval((2, False), (3, True))
+        result = Interval((0,False), (3, True))
+        eq_(self.i + i, result, msg="{} + {}".format(self.i, i))
         
 class RightClosedInterval(OpenInterval):
     def setUp(self):
@@ -56,3 +65,8 @@ class ClosedInterval(OpenInterval):
     def test_equal_intervals(self):
         i = Interval((0, False), (2, False))
         eq_(self.i, i, msg="{} == {}".format(self.i, i))
+    @raises(ValueError)
+    def test_interval_addition(self):
+        i = Interval((2, False), (3, True))
+        result = Interval((0,True), (3, True))
+        eq_(self.i + i, result, msg="{} + {}".format(self.i, i))
