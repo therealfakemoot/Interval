@@ -41,7 +41,7 @@ class OpenInterval(TestCase):
 
     def test_nonsequential_interval_addition(self):
         i = Interval((-2, True), (0, True))
-        result = Interval((-2, True), (0, True))
+        result = Interval((-2, True), (2, True))
         eq_(i + self.i, result, msg="{}+{}={}".format(i, self.i, i + self.i))
 
 
@@ -61,7 +61,7 @@ class RightClosedInterval(OpenInterval):
 
     def test_nonsequential_interval_addition(self):
         i = Interval((-2, True), (0, True))
-        result = Interval((-2, True), (0, True))
+        result = Interval((-2, True), (2, False))
         eq_(i + self.i, result, msg="{}+{}={}".format(i, self.i, i + self.i))
 
 
