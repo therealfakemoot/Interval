@@ -39,11 +39,17 @@ class Interval(object):
     def __nonzero__(self):
         return (self.lopen or self.ropen) and (self.start == self.end)
 
-    def __add__(self, other):
+    def _add(self, other):
         if self & other:
             return Interval((self.start, self.lopen), (other.end, other.ropen))
         else:
             raise ValueError('Addition is not supported for non-overlapping intervals.')
+
+    def __add__(self, other):
+        if self < other:
+            return self._add(other)
+        else:
+            return other._add(self)
 
     def __lt__(self, other):
         if self.ropen or other.lopen:

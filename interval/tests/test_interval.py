@@ -32,10 +32,15 @@ class OpenInterval(TestCase):
         i = Interval((3, True), (4, True))
         ok_(not self.i & i, msg="not {} & {}".format(self.i, i))
 
-    def test_interval_addition(self):
+    def test_sequential_interval_addition(self):
         i = Interval((2, True), (3, True))
         result = Interval((0,True), (3, True))
         eq_(self.i + i, result, msg="{} + {}".format(self.i, i))
+
+    def test_nonsequential_interval_addition(self):
+        i = Interval((-2, True), (0, True))
+        result = Interval((-2,True), (0, True))
+        eq_(i + self.i, result, msg="{} + {}".format(i, self.i))
 
 class LeftClosedInterval(OpenInterval):
     def setUp(self):
