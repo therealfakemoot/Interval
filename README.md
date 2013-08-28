@@ -1,4 +1,4 @@
-Interval is a general purpose library for providing a [mathematical interval](http://en.wikipedia.org/wiki/Interval_(mathematics)) type that supports sorting and intersection checks.
+Interval is a general purpose library for providing a [mathematical interval](http://en.wikipedia.org/wiki/Interval_(mathematics) type that supports sorting and intersection checks.
 
 #Installation
 ````
@@ -14,7 +14,21 @@ Interval objects support the concept of being left or right closed or open. They
 ```py
 from interval.core import Interval
 
-a = Interval((0, True), (5, False))
+a = Interval((0, True), (5, True))
 b = Interval((5, True), (10, True))
-a + b #This will raise a ValueError if the intervals do not intersect.
+a + b == Interval((0, True), (10, True))
+```
+
+This can be used with non-integer data types as well.
+
+```py
+from interval.core import Interval
+a = datetime.datetime(2013, 8, 28, 15, 41, 23, 369583)
+td = datetime.timedelta(10)
+b = a + td
+c = b + td
+date_intervalA = Interval((a, True), (b, True))
+date_intervalB = Interval((b, True), (c, True))
+repr(date_intervalA + date_intervalB) 
+#(2013-08-28 15:41:23.369583,2013-09-17 15:41:23.369583)
 ```
