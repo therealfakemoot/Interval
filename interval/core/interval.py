@@ -20,7 +20,7 @@ class Interval(object):
         self.end = end
         self.ropen = rightopen
 
-    def __str__(self):
+    def __repr__(self):
         if self.lopen:
             l = '('
         else:
