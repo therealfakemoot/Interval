@@ -1,6 +1,9 @@
 from functools import total_ordering
 
-class ValidationError(Exception):pass
+
+class ValidationError(Exception):
+    pass
+
 
 @total_ordering
 class Interval(object):
@@ -31,10 +34,14 @@ class Interval(object):
         else:
             r = ']'
 
-        return "{l}{start},{end}{r}".format(l=l,r=r, start=self.start, end=self.end)
+        return "{l}{start},{end}{r}".format(l=l,
+                                            r=r,
+                                            start=self.start,
+                                            end=self.end)
 
     def __eq__(self, other):
-        return (self.start,self.end) == (other.start,other.end) and (self.lopen, self.ropen) == (other.lopen, other.ropen)
+        return (self.start, self.end) == (other.start, other.end) and (
+            (self.lopen, self.ropen) == (other.lopen, other.ropen))
 
     def __nonzero__(self):
         return (self.lopen or self.ropen) and (self.start == self.end)
@@ -43,7 +50,7 @@ class Interval(object):
         if self & other:
             return Interval((self.start, self.lopen), (other.end, other.ropen))
         else:
-            raise ValueError('Addition is not supported for non-overlapping intervals.')
+            raise ValueError('"+" unsupported for non-overlapping intervals.')
 
     def __add__(self, other):
         if self < other:
