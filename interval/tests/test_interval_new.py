@@ -3,8 +3,10 @@ from interval.core import ValidationError
 
 from nose.tools import raises, ok_, eq_
 
+
 def _add_intervals(a, b):
     return a + b
+
 
 def test_invalid_interval_additions():
     i = Interval((0, False), (1, False))
@@ -21,6 +23,7 @@ def test_invalid_interval_additions():
     for v in vals:
         yield raises(ValueError)(_add_intervals), i, v
 
+
 def test_false_interval_intersections():
     i = Interval((0, True), (1, True))
 
@@ -33,8 +36,9 @@ def test_false_interval_intersections():
             ]
 
     results = [True] * 5 + [False]
-    
-    intersect = lambda a,b,v: eq_(a & b, v,msg="{} & {} == {}".format(a, b, v))
+
+    intersect = lambda a, b, v: eq_(a & b, v,
+                                    msg="{} & {} == {}".format(a, b, v))
 
     for v, r in zip(vals, results):
         yield intersect, i, v, r

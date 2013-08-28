@@ -5,9 +5,11 @@ from nose.tools import raises, eq_, ok_
 
 from unittest import TestCase
 
+
 @raises(ValidationError)
 def test_invalid_interval_creation():
-    Interval((1, True),(0, True))
+    Interval((1, True), (0, True))
+
 
 class OpenInterval(TestCase):
     def setUp(self):
@@ -34,13 +36,14 @@ class OpenInterval(TestCase):
 
     def test_sequential_interval_addition(self):
         i = Interval((2, True), (3, True))
-        result = Interval((0,True), (3, True))
+        result = Interval((0, True), (3, True))
         eq_(self.i + i, result, msg="{} + {}".format(self.i, i))
 
     def test_nonsequential_interval_addition(self):
         i = Interval((-2, True), (0, True))
-        result = Interval((-2,True), (0, True))
+        result = Interval((-2, True), (0, True))
         eq_(i + self.i, result, msg="{} + {}".format(i, self.i))
+
 
 class LeftClosedInterval(OpenInterval):
     def setUp(self):
@@ -48,12 +51,19 @@ class LeftClosedInterval(OpenInterval):
 
     def test_interval_addition(self):
         i = Interval((2, False), (3, True))
-        result = Interval((0,False), (3, True))
+        result = Interval((0, False), (3, True))
         eq_(self.i + i, result, msg="{} + {}".format(self.i, i))
-        
+
+
 class RightClosedInterval(OpenInterval):
     def setUp(self):
         self.i = Interval((0, True), (2, False))
+
+    def test_nonsequential_interval_addition(self):
+        i = Interval((-2, True), (0, True))
+        result = Interval((-2, True), (0, True))
+        eq_(i + self.i, result, msg="{} + {}".format(i, self.i))
+
 
 class ClosedInterval(OpenInterval):
     def setUp(self):
@@ -62,5 +72,5 @@ class ClosedInterval(OpenInterval):
     @raises(ValueError)
     def test_interval_addition(self):
         i = Interval((2, False), (3, True))
-        result = Interval((0,True), (3, True))
+        result = Interval((0, True), (3, True))
         eq_(self.i + i, result, msg="{} + {}".format(self.i, i))
