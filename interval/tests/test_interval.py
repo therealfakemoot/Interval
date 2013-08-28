@@ -49,8 +49,8 @@ class LeftClosedInterval(OpenInterval):
     def setUp(self):
         self.i = Interval((0, False), (2, True))
 
-    def test_interval_addition(self):
-        i = Interval((2, False), (3, True))
+    def test_sequential_interval_addition(self):
+        i = Interval((2, True), (3, True))
         result = Interval((0, False), (3, True))
         eq_(self.i + i, result, msg="{}+{}={}".format(self.i, i, self.i + i))
 
@@ -69,8 +69,12 @@ class ClosedInterval(OpenInterval):
     def setUp(self):
         self.i = Interval((0, False), (2, False))
 
-    @raises(ValueError)
-    def test_interval_addition(self):
-        i = Interval((2, False), (3, True))
-        result = Interval((0, True), (3, True))
-        eq_(self.i + i, result, msg="{} + {}".format(self.i, i))
+    def test_nonsequential_interval_addition(self):
+        i = Interval((-2, True), (0, True))
+        result = Interval((-2, True), (2, False))
+        eq_(i + self.i, result, msg="{}+{}={}".format(i, self.i, i + self.i))
+
+    def test_sequential_interval_addition(self):
+        i = Interval((2, True), (3, True))
+        result = Interval((0, False), (3, True))
+        eq_(self.i + i, result, msg="{}+{}={}".format(self.i, i, self.i + i))
