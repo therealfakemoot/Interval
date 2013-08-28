@@ -25,7 +25,7 @@ This can be used with non-integer data types as well.
 from interval.core import Interval
 import datetime
 
-a = datetime.datetime(2013, 8, 28, 15, 41, 23, 369583)
+a = datetime.datetime(datetime.datetime.now())
 td = datetime.timedelta(10)
 b = a + td
 c = b + td
