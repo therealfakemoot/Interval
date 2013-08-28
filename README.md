@@ -23,6 +23,8 @@ This can be used with non-integer data types as well.
 
 ```py
 from interval.core import Interval
+import datetime
+
 a = datetime.datetime(2013, 8, 28, 15, 41, 23, 369583)
 td = datetime.timedelta(10)
 b = a + td
