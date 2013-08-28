@@ -31,6 +31,7 @@ b = a + td
 c = b + td
 date_intervalA = Interval((a, True), (b, True))
 date_intervalB = Interval((b, True), (c, True))
-repr(date_intervalA + date_intervalB) 
-#(2013-08-28 15:41:23.369583,2013-09-17 15:41:23.369583)
+date_intervalA + date_intervalB == Interval((a, True), (c, True))
 ```
+
+Note that these examples only show 'normal' non-failing operations. Non-overlapping intervals cannot be added together, but can still be compared for intersection and precedence.
