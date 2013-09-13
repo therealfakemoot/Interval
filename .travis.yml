@@ -4,4 +4,4 @@ python:
 install:
   - "pip install --user tox"
 
-script: tox
+script: ~/.local/bin/tox
