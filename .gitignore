@@ -1,3 +1,9 @@
 *.pyc
+*.sw[op]
+
+*.cache/
+*.coverage
+*.tox/
+*.egg-info/
 
 *_trial_temp/
